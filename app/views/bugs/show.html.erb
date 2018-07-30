@@ -1,0 +1,44 @@
+<div class="container"> 
+<div class="row">
+
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">         
+        <h3>Bug Details</h3>   
+       
+            <div>   
+              <label>Title</label>   
+              <%= @bug.title %>   
+            </div>   
+  
+            <div>   
+              <label>Deadline</label>   
+              <%= @bug.deadline %>   
+            </div>   
+            
+            <div>   
+              <label>Screenshot</label>   
+              <%= image_tag @bug.screenshot.to_s, :size => "30x30", class: "rounded mx-auto d-block" %>   
+            </div> 
+
+            <div>   
+              <label>Type</label>   
+              <%= @bug.types %>   
+            </div>  
+
+            <div>   
+              <label>Status</label>   
+              <%= @bug.status %>   
+            </div> 
+
+            <div>   
+              <label>Project</label>   
+              <%= @bug.project.title %>   
+            </div>  
+         
+      <div>   
+        <%= link_to 'Back', { controller: 'bugs', action: 'index'} %>   
+      </div> 
+      </div>
+<div class="col-sm-4"></div>  
+</div>  
+</div>

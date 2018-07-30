@@ -1,0 +1,45 @@
+<div class="container">  
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">  
+  <%= form_for @project, url: {action: :create} do |f| %>   
+      <div>   
+        <h3>Add a Project</h3>   
+      </div>   
+      <div>   
+        <p>   
+          <%= "<div>#{@project.errors.full_messages.first}</div>".html_safe if @project.errors.any? %>   
+      
+       <div>   
+            <%= f.label :title %> 
+              <%= f.text_field :title, class: 'form-control' %>   
+        </div> 
+
+        <div>   
+            <%= f.label :description %>    
+              <%= f.text_field :description, class: 'form-control' %>   
+        </div> 
+
+<% @users.each do |user| %>
+
+ <%= f.fields_for :user_projects do |u| %>
+         <div>   
+             <%= u.label user.name %>      
+               <%= u.check_box :user_id, {},user.id, nil %>
+
+         </div>  
+   <% end %> 
+   <% end %> 
+         </p>   
+      </div>   
+      <div>   
+        <%= link_to 'Back', { controller: 'projects', action: 'index'} %>   
+        <%= f.submit 'Create Project' %>   
+      </div>   
+  <% end %>   
+</div>  
+  <div class="col-sm-4"></div>
+</div>
+</div>
+
+ 

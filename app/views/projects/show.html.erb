@@ -1,0 +1,73 @@
+<div class="container"> 
+<div class="row">
+
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">         
+        <h3>Project Details</h3>   
+  
+            <div>   
+              <label>Title</label>   
+              <%= @project.title %>   
+            </div>   
+
+            <div>   
+              <label>Description</label>   
+              <%= @project.description %>   
+            </div> 
+
+             <div>   
+              <label>User</label>   
+              <% @project.users.each do |user| %>
+               <%=  user.name%>
+               <% end %>   
+            </div> 
+            <table border=2px>
+
+  <thead>
+    <tr>
+  <th>Title</th>
+  <th>Deadline</th>
+  <th>Screenshot</th>
+  <th>Type</th>
+  <th>Status</th>
+  <% if (current_user.user_type == 'Developer') %>
+  <th>Assign</th>
+  <% end %>
+</tr>
+  </thead>
+  <tbody>
+    <% @project.bugs.each do |bug| %>
+    <tr>
+    <td><%= bug.title %></td>
+    <td><%= bug.deadline %></td>
+    <td><%= image_tag bug.screenshot.to_s, :size => "30x30", class: "img-thumbnail" %></td>
+    <td><%= bug.types %></td>
+    <td id='bug_status_<%= bug.id %>' ><%= bug.status %></td>
+     <% if (current_user.user_type == "Developer") %>
+         <%  if (bug.developer_id != nil ) && (bug.status == "started") && (current_user.id == bug.developer_id) %>
+         <td id='<%= bug.id %>' ><button id="bug_button_<%= bug.id %>" data-id="<%= bug.id %>" class="btn btn-info assignme_mark">Mark</button></td>
+                <% elsif (bug.developer_id != nil) && (bug.types == "bug") && (current_user.id == bug.developer_id) %>
+            <td>Resolved<td>
+            <% elsif (bug.developer_id != nil) && (bug.types == "feature") && (current_user.id == bug.developer_id) %>
+           <td>Completed</td> 
+            <% elsif (bug.developer_id != nil) && (bug.status == "started") || (bug.status == "completed") || (bug.status == "resolved") && (current_user.id != bug.developer_id) %> 
+            <td>Assigned</td> 
+            <% else %> 
+              <td id='<%= bug.id %>' ><button id="bug_button_<%= bug.id %>" data-id="<%= bug.id %>" class="btn btn-info assignme_mark">Assign me</button></td>
+            <% end %>   
+            <% end %>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+      <div>   
+        <%= link_to 'Back',{controller: 'projects', action: 'index'}, class: "btn btn-primary"  %>   
+      </div> 
+
+
+      </div>
+<div class="col-sm-4">
+</div>  
+</div>  
+</div>

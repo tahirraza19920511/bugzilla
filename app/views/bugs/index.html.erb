@@ -1,0 +1,41 @@
+<div class="container">  
+	<h1 class="text-center">All Bugs</h1>
+<div class="row">
+
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6 text-center margin-right">  
+
+<table border=2px>
+
+	<thead>
+		<tr>
+	<th>Title</th>
+	<th>Deadline</th>
+	<th>Screenshot</th>
+	<th>Type</th>
+	<th>Status</th>
+	<th>Show</th>
+	<th>Edit</th>
+	<th>Delete</th>
+</tr>
+	</thead>
+	<tbody>
+		<% @bugs.each do |bug| %>
+		<tr>
+		<td><%= bug.title %></td>
+		<td><%= bug.deadline %></td>
+		<td><%= image_tag bug.screenshot.to_s, :size => "30x30", class: "img-thumbnail" %></td>
+		<td><%= bug.types %></td>
+		<td><%= bug.status %></td>
+		<td><%= link_to 'show', bug_path(bug), class: "btn btn-primary" %></td>
+		<td><%= link_to 'edit', edit_bug_path(bug), class: "btn btn-success" %></td>
+		<td><%= link_to 'delete', bug_path(bug), method: :delete, class: "btn btn-danger" %></td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+
+</div>
+<div class="col-sm-3"></div>
+</div>
+</div>

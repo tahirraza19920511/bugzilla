@@ -1,0 +1,20 @@
+<div class="header">
+    <div class="container clearfix">
+        <h1 id="logo"><%= link_to "BUGZILLA", root_path  %>  </h1>
+        <nav>
+
+            
+           <% if user_signed_in? %>
+           <%= current_user.name %>
+           <% if (current_user.user_type == 'Qa') %>
+           <%= link_to "All Bug", bugs_path %>
+           <% end %>
+            <%= link_to "All Project", projects_path %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+            <% else %>
+            <%= link_to "Log in", new_user_session_path %>
+            <% end %>
+            <%= link_to "Register", new_user_registration_path %>
+        </nav>
+    </div>
+</div>
